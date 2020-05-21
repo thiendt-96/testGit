@@ -1,0 +1,156 @@
+.wrapper {
+  margin-top: 1rem;
+  border: 1px solid $color-gray;
+  border-top: 0;
+  position: relative;
+
+  .icon-modal {
+    position: absolute;
+    left: 91%;
+    top: 5%;
+    width: 15px;
+    height: 15px;
+  }
+
+  font-family: "Roboto", sans-serif;
+}
+
+.body {
+  padding: 0 2rem;
+}
+
+.content {
+  margin: 2rem auto;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  background-color: $color-gray;
+  align-items: center;
+
+  &__header {
+    display: flex;
+    padding: 2rem;
+    font-size: 2rem;
+    line-height: 2;
+    border-radius: 1rem;
+  }
+
+  &__icon {
+    margin-right: 2rem;
+  }
+
+  .add-new {
+    margin-right: 3rem;
+    cursor: pointer;
+
+    &__text {
+      color: $color-blue-2;
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+
+  &__row {
+    border: 1px solid $color-gray;
+
+    &:nth-child(even) {
+      background-color: $color-gray;
+    }
+  }
+
+  &__col {
+    &--center {
+      text-align: center;
+
+      svg {
+        display: inline;
+      }
+    }
+
+    &--fix-width {
+      width: 15%;
+    }
+
+    &--pointer {
+      cursor: pointer;
+    }
+
+    &--green {
+      color: $color-green-1;
+    }
+
+    &--red {
+      color: $color-red;
+    }
+  }
+}
+
+.wrapper-form {
+  top: 0;
+  position: absolute;
+  width: 30%;
+  background-color: $color-white;
+  border: 1px solid $color-gray;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10%;
+}
+
+.form-add {
+  padding: 2rem;
+  background-color: $color-red-2;
+
+  &__group {
+    margin: 1rem 0;
+    text-align: left;
+  }
+
+  &__title {
+    background-color: $color-blue;
+    text-align: center;
+    padding: 2rem;
+    color: $color-white;
+    font-size: 3rem;
+    font-weight: 500;
+  }
+
+  &__label {
+    width: 100%;
+    font-size: 1.6rem;
+  }
+
+  &__input {
+    width: 100%;
+    border: 1px solid $color-gray;
+    height: 3rem;
+    padding: 1rem;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+  }
+
+  &__event {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 2rem;
+    margin-top: 2rem;
+  }
+
+  &__cancel {
+    background-color: $color-red;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+  }
+
+  &__add {
+    background-color: $color-blue;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    margin-left: 1rem;
+    font-size: 1.6rem;
+  }
+}

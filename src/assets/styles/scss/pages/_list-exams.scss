@@ -1,0 +1,65 @@
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 2rem;
+
+  @include mq-sm-down {
+    @media (max-width: 575.98px) {
+      text-align: center;
+    }
+  }
+}
+
+.exam {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  font-family: "Roboto", sans-serif;
+
+  &__item {
+    border: 1px solid $color-gray;
+    width: calc(25% - 2rem);
+    box-shadow: 0 2px 4px $color-shadow;
+    border-radius: 1 rem;
+    margin-bottom: 2rem;
+    margin-right: 2rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-gray;
+    }
+
+    @include mq-sm-down {
+      @media (max-width: 575.98px) {
+        width: 100%;
+        margin: 2rem;
+      }
+    }
+  }
+
+  &__name {
+    width: 9.5rem;
+    height: 9.5rem;
+    border-radius: 50%;
+    margin: 2rem auto;
+    text-align: center;
+    position: relative;
+    border: 1px solid $color-blue;
+    font-weight: 600;
+  }
+
+  .text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem;
+  }
+
+  &__content {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.6rem;
+  }
+}

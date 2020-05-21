@@ -1,0 +1,17 @@
+// settings
+@import './settings/base';
+@import './settings//breakpoint';
+@import './settings/layout';
+@import './settings/color';
+
+//modules
+@import './modules/common';
+@import './modules/header';
+
+//pages
+@import './pages/users.scss';
+@import './pages/question.scss';
+@import './pages/list-exams';
+@import './pages/exam-detail';
+@import './pages/modal';
+@import './pages/result-exams';

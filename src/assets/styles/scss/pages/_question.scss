@@ -1,0 +1,11 @@
+.question {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+
+  &__wrapper {
+    width: 50%;
+    padding-right: 1rem;
+    margin-top: 1rem;
+  }
+}
