@@ -1,39 +1,26 @@
 import React, { Component } from 'react';
 import IosTrashOutline from '../../../../node_modules/react-ionicons/lib/IosTrashOutline';
 import IosCreate from '../../../../node_modules/react-ionicons/lib/IosCreate';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reSet } from '../../../stores/actions/index';
-import AddNewUser from './AddNewUser';
 
 class ListUsersItem extends Component {
-  constructor(props) {
-    super(props)
-    this.state={
-      isUser: false,
-      idUser:''
-    }
-  }
   handleDeleteUser = (id) => {
     this.props.handleDelete(id)
   }
 
-  handleClick = (id) => {
-    this.setState({
-      isUser: !this.state.isUser,
-      idUser: id
+  handleReset = () => {
 
-    })
-  }
-  onSet = (value) => {
-    this.setState({
-      isUser: value
-    })
   }
 
   render() {
     const { user } = this.props;
     const color = user.status === true ? 'table__col--green' : 'table__col--red';
-
+    const newTo = {
+      pathname: `/user/edit/${user.id}`,
+      data: { user }
+    }
     return (
       <React.Fragment>
         <tr className="table__row">
@@ -44,12 +31,9 @@ class ListUsersItem extends Component {
             {user.status === true ? 'Hoạt Động' : 'Tạm Vắng'}
           </td>
           <td className="table__col table__col--center table__col--fix-width table__col--pointer">
-            <IosCreate color="#007ab5" onClick={() => this.handleClick(user.id)} />
-            {
-              this.state.isUser
-                ? <AddNewUser isUser={this.state.isUser} onSet={this.onSet} id={this.state.idUser} />
-                : ""
-            }
+            <Link to={newTo} onClick={this.handleReset} >
+              <IosCreate color="#007ab5" />
+            </Link>
           </td>
           <td className="table__col table__col--center table__col--fix-width table__col--pointer">
             <button onClick={() => this.handleDeleteUser(user.id)}>

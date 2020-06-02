@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
-import { addExam, editExam, getAllExams } from '../../../stores/actions/index';
+import { withRouter } from 'react-router-dom';
+import { addExam, editExam } from '../../../stores/actions/index';
 import { Redirect } from 'react-router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 class ExamForm extends Component {
   constructor(props) {
@@ -12,13 +11,9 @@ class ExamForm extends Component {
 
     this.state = {
       exam: '',
-      time: '',
+      time: ''
     }
   }
-  handleClick = (value) => {
-    this.props.onSet(value);
-  }
-
 
   componentWillMount() {
     if (this.props.history.location.data) {
@@ -37,27 +32,28 @@ class ExamForm extends Component {
     })
   }
 
-  handleOnSubmit = (event) => {
+  handleOnSubmit = (event, isEdit) => {
     event.preventDefault();
     const { exam, time } = this.state
     const data = {
       "contest": exam,
       "exam_time": parseInt(time)
     }
-    this.props.dispatchGetAllExam()
-    this.props.id ? this.props.dispatchEditExam(this.props.id, data) : this.props.dispatchAddExam(data)
+    const { id } = isEdit ? this.props.history.location.data.exam : ''
+    isEdit ? this.props.dispatchEditExam(id, data) : this.props.dispatchAddExam(data)
   }
 
+
   render() {
-    
+    const isEdit = this.props.match.params.id;
     const value = this.state;
     const { isCheckAddSuccess } = this.props.isCheckAddSuccess;
     const { isCheckEditSuccess } = this.props.isCheckEditSuccess;
+
     return (
       <div className="wrapper-form">
-        <FontAwesomeIcon className="icon-modal" icon={faTimes} onClick={() => this.handleClick(false)} />
         <h2 className="form-add__title">{
-          this.props.id ? 'Cập Nhật Đề Thi' : 'Thêm Mới Đề Thi'
+          isEdit ? 'Cập Nhật Đề Thi' : 'Thêm Mới Đề Thi'
         }
         </h2>
         <form className="form-add" action="#">
@@ -82,11 +78,13 @@ class ExamForm extends Component {
             />
           </div>
           <div className="form-add__event">
-            <Link to='/exam/user'>hello</Link>
+            <Link to='/exam' className="form-add__cancel">
+              Thoát
+            </Link>
             {
-              this.props.id ?
-                <Link to='/exam' className="form-add__add" onClick={(event) => this.handleOnSubmit(event)}> Sửa</Link> :
-                <button className="form-add__add" onClick={(event) => this.handleOnSubmit(event)}>Thêm</button>
+              isEdit ?
+                <button className="form-add__add" onClick={(event) => this.handleOnSubmit(event, isEdit)}>Sửa</button> :
+                <button className="form-add__add" onClick={(event) => this.handleOnSubmit(event, isEdit)}>Thêm</button>
             }
             {
               isCheckAddSuccess && <Redirect to='/exam' />
@@ -111,5 +109,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   dispatchAddExam: (data) => addExam(data),
   dispatchEditExam: (id, data) => editExam(id, data),
-  dispatchGetAllExam: () => getAllExams()
-}) (withRouter(ExamForm));
+})(withRouter(ExamForm));

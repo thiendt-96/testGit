@@ -6,8 +6,6 @@ import { deleteUser, editUser } from '../../../stores/actions';
 class ListUsers extends Component {
   render() {
     const { users } = this.props.users;
-    // console.log("users", users.length);
-
     const handleDeleteUser = (id) => {
       this.props.distpatchDeleteUse(id)
     }
@@ -25,7 +23,7 @@ class ListUsers extends Component {
               <th className="table__col--center">Xóa</th>
             </tr>
             {
-              (users && users.length) > 0 && users.map((user) => (
+              users.length > 0 && users.map((user) => (
                 <ListUsersItem
                   user={user}
                   key={user ? user.id : ''}

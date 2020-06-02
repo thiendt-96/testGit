@@ -17,7 +17,7 @@ import {
 const nameInitialState = {
   exams: [],
   isCheckAddSuccess: false,
-  isCheckEditSuccess: false,
+  isCheckEditSuccess: false
 }
 
 const getAllExamsReducer = (state = nameInitialState, action) => {
@@ -40,7 +40,7 @@ const getAllExamsReducer = (state = nameInitialState, action) => {
       return {
         ...state,
         isCheckAddSuccess: true,
-        exams: [...state.exams, action.data]
+        exams: [state.exams, action.data]
       }
     case ADD_EXAM_ERROR:
       return {
@@ -48,14 +48,15 @@ const getAllExamsReducer = (state = nameInitialState, action) => {
         isCheckAddSuccess: false,
       }
     case EDIT_EXAM:
-      console.log(action.data);
-
       return {
         ...state,
       }
     case EDIT_EXAM_SUCCESS:
+      console.log(action.data);
       return {
         ...state,
+        isCheckEditSuccess: true,
+        exams: action.data
       }
     case EDIT_EXAM_ERROR:
       return {

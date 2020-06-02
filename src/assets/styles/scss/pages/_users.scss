@@ -2,17 +2,6 @@
   margin-top: 1rem;
   border: 1px solid $color-gray;
   border-top: 0;
-  position: relative;
-
-  .icon-modal {
-    position: absolute;
-    left: 91%;
-    top: 5%;
-    width: 15px;
-    height: 15px;
-  }
-
-  font-family: "Roboto", sans-serif;
 }
 
 .body {
@@ -90,7 +79,6 @@
 }
 
 .wrapper-form {
-  top: 0;
   position: absolute;
   width: 30%;
   background-color: $color-white;
@@ -102,11 +90,9 @@
 
 .form-add {
   padding: 2rem;
-  background-color: $color-red-2;
 
   &__group {
     margin: 1rem 0;
-    text-align: left;
   }
 
   &__title {
@@ -134,7 +120,7 @@
 
   &__event {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     margin-right: 2rem;
     margin-top: 2rem;
   }

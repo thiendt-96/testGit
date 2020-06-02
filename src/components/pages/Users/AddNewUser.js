@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { addUser, editUser } from '../../../stores/actions/index';
 import { Redirect } from 'react-router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 class AddNewUser extends Component {
   constructor(props) {
@@ -15,9 +14,6 @@ class AddNewUser extends Component {
       email: ''
     }
   }
-  handleClick = (value) => {
-    this.props.onSet(value);
-  }
 
   componentWillMount() {
     if (this.props.history.location.data) {
@@ -26,7 +22,6 @@ class AddNewUser extends Component {
         email: this.props.history.location.data.user.email
       });
     }
-    
   }
 
   handleOnChange = (event) => {
@@ -37,29 +32,28 @@ class AddNewUser extends Component {
     })
   }
 
-  handleOnSubmit = (event) => {
+  handleOnSubmit = (event, isEdit) => {
     event.preventDefault();
     const { username, email } = this.state
     const data = {
       "name": username,
       "email": email
     }
-    this.props.id ? this.props.dispatchEditUser(this.props.id, data) : this.props.dispatchAddUser(data)
-
+    const { id } = isEdit ? this.props.history.location.data.user : '' // ddoajn /usser/add -> /usser o dau
+    isEdit ? this.props.dispatchEditUser(id, data) : this.props.dispatchAddUser(data)
   }
 
-  render() {
-    console.log(this.state);
 
+  render() {
+    const isEdit = this.props.match.params.id;
     const value = this.state;
     const { isCheckAddSuccess } = this.props.isCheckAddSuccess;
     const { isCheckEditSuccess } = this.props.isCheckEditSuccess;
 
     return (
       <div className="wrapper-form">
-        <FontAwesomeIcon className="icon-modal" icon={faTimes} onClick={() => this.handleClick(false)} />
         <h2 className="form-add__title">{
-          this.props.id ? 'Sửa Thông Tin Người Dùng' : 'Thêm Mới Người Dùng'
+          isEdit ? 'Sửa Thông Tin Người Dùng' : 'Thêm Mới Người Dùng'
         }
         </h2>
         <form className="form-add" action="#">
@@ -67,7 +61,7 @@ class AddNewUser extends Component {
             <label className="form-add__label">Họ Và Tên:</label>
             <input
               className="form-add__input"
-              placeholder='Họ và tên'
+              placeholder="Họ và tên"
               name="username"
               value={value.username}
               onChange={(event) => this.handleOnChange(event)}
@@ -85,13 +79,17 @@ class AddNewUser extends Component {
             />
           </div>
           <div className="form-add__event">
+            <Link to='/user' className="form-add__cancel">
+              Thoát
+            </Link>
             {
-              this.props.id ?
-                <button type="submit" className="form-add__add" onClick={(event) => this.handleOnSubmit(event, this.props.id)}>Sửa</button> :
-                <button type="submit" className="form-add__add" onClick={(event) => this.handleOnSubmit(event, this.props.id)}>Thêm</button>
+              isEdit ?
+                <button type="submit" className="form-add__add" onClick={(event) => this.handleOnSubmit(event, isEdit)}>Sửa</button> :
+                <button type="submit" className="form-add__add" onClick={(event) => this.handleOnSubmit(event, isEdit)}>Thêm</button>
             }
             {
-              isCheckAddSuccess && <Redirect to='/user' />
+              // isCheckAddSuccess && this.props.history.push("/user")
+              isCheckAddSuccess && <Redirect to='/user' /> // isCheckAddSuccess = true neen no redict ve /user
             }
             {
               isCheckEditSuccess && <Redirect to='/user' />

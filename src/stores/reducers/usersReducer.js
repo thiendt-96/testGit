@@ -51,13 +51,13 @@ export default (state = nameInitialStateUsers, action) => {
       }
     case EDIT_USER:
       return {
-        // ...state, 
+        ...state, 
       }
     case EDIT_USER_SUCCESS:
       return {
         ...state,
         isCheckEditSuccess: true,
-        // users: [...state.users.findIndex(user => user.id === action.data.id)]
+        users: action.data
       }
     case EDIT_USER_ERROR:
       return {

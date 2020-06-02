@@ -4,14 +4,12 @@ import { connect } from 'react-redux'
 import { deleteExam } from '../../../stores/actions';
 
 class ListExams extends Component {
-  
   render() {
     const { exams } = this.props.exams;
-    console.log(this.props.exams);
-        
     const handleDeleteExam = (id) => {
       this.props.distpatchDeleteExam(id)
     }
+
     return (
       <div>
         <table className="table">
@@ -24,7 +22,7 @@ class ListExams extends Component {
               <th className="table__col--center">Xóa</th>
             </tr>
             {
-              exams.length > 0 &&exams.map((exam) => (
+              exams.length > 0 && exams.map((exam) => (
                 <ListExamsItem
                   exam={exam}
                   key={exam.id}
